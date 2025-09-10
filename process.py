@@ -1,6 +1,7 @@
 # Imports
 from ascii_magic import AsciiArt
 import cv2
+import os
 
 # Ascii Conversions
 
@@ -26,6 +27,11 @@ class Capture:
         while True:
             ret, frame = self.capture.read()
 
+            if not ret:
+                continue
+
+            if not os.path.exists("frames"):
+                os.makedirs("frames")
             frame_path = "frames/frame.png"
 
             cv2.imwrite(frame_path, frame)
